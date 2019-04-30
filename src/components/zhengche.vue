@@ -93,7 +93,7 @@
                     <el-input type="textarea" v-model="form.desc"></el-input>
                 </el-form-item>
             </el-form>
-            <el-button class='btn' type="primary" plain>确认</el-button>
+            <el-button class='btn' type="primary" plain　@click='submitData()'>确认</el-button>
         </div>
     </el-card>
 </template>
@@ -143,11 +143,12 @@ export default {
         this.getSysCarType();
     },
     methods: {
-         handleItemChange(val) {
-        console.log('active item:', val);
-        
-      },
-
+        // 点击提交弹出对话框
+        submitData(){
+            this.$alert('提交成功，系统正在为你匹配最优秀的承运商', {
+                confirmButtonText: '确定'
+            });
+        },
         // 图片移除时触发
         handleRemove(){
 
