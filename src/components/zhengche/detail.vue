@@ -1,6 +1,10 @@
 <template>
     <el-card class="box-card">
-        <el-button class='back_btn' type="primary" plain @click='redire()'>返回上一页</el-button>
+        <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb-item :to="{ path: '/' }">发货</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{ path: '/zhengche' }">整车</el-breadcrumb-item>
+            <el-breadcrumb-item>详细体积重量</el-breadcrumb-item>
+        </el-breadcrumb>
         <el-form ref="form" :inline="true" :model="form" label-width="80px">
             <el-form-item label="单个体积">
                 <el-input v-model="form.name"></el-input>
@@ -35,7 +39,7 @@
                 <p>体积: 1) 100*100*100 *12 = 12000000</p>
                 <p>重量: 1) 100*100*100 *12 = 12000000</p>
             </div>
-            <el-button class='submit' type="primary">提交</el-button>
+            <el-button class='submit' type="primary" @click='back_btn()'>提交</el-button>
         </el-form>
     </el-card>
 </template>
@@ -48,10 +52,9 @@ export default {
         }
     },
     methods: {
-        // 点击返回返回到装车页
-        redire() {
+        back_btn(){
             this.$router.push({
-                path: '/zhengche'
+                name: 'zhengche'
             });
         }
     }
@@ -67,7 +70,7 @@ export default {
         margin-left: 10px;
     }
     .el-form {
-        margin-top: 10px;
+        margin-top: 20px;
     }
     .el-form-item__content {
         width: 300px;

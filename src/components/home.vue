@@ -29,7 +29,7 @@
                     <el-submenu index="1">
                         <template slot="title"><i class="el-icon-location"></i>发货</template>
                         <el-menu-item index="/zhengche"><i class="el-icon-menu"></i>整车</el-menu-item>
-                        <el-menu-item index="/users"><i class="el-icon-menu"></i>零担</el-menu-item>
+                        <el-menu-item index="/lingdan"><i class="el-icon-menu"></i>零担</el-menu-item>
                         <el-menu-item index="/users"><i class="el-icon-menu"></i>拼车</el-menu-item>
                     </el-submenu>
                     <el-submenu index="2">

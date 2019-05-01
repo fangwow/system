@@ -8,7 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/index.css'
 import App from './App.vue'
 Vue.prototype.$http = axios
-axios.defaults.baseURL = 'http://192.168.31.171:8081'
+axios.defaults.baseURL = 'http://106.13.100.42:8081'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

@@ -1,7 +1,10 @@
 <template>
     <el-card class="box-card">
         <div slot="header" class="clearfix">
-            <h1>发布整车</h1>
+            <el-breadcrumb separator-class="el-icon-arrow-right">
+                <el-breadcrumb-item :to="{ path: '/' }">发货</el-breadcrumb-item>
+                <el-breadcrumb-item>零担</el-breadcrumb-item>
+            </el-breadcrumb>
         </div>
         <div class="text item">
             <el-form :inline="true" :model="form" class="demo-form-inline" label-width="150px">
@@ -9,7 +12,6 @@
                     <el-cascader
                         :options="options"
                         v-model="selectedOptions1"
-                        @active-item-change="handleItemChange"
                         :props = 'defaultProp'
                         @change="handleChange($event)">
                     </el-cascader>
@@ -27,10 +29,10 @@
                         <el-button class='detailBtn' type="primary" plain>详细体积重量</el-button>
                     </router-link>
                 </div>
-                <el-form-item label="总体积">
+                <el-form-item label="体积">
                     <el-input v-model="form.user" placeholder="审批人"></el-input>
                 </el-form-item>
-                <el-form-item label="总重量">
+                <el-form-item label="重量">
                     <el-input v-model="form.user" placeholder="审批人"></el-input>
                 </el-form-item>
                 <el-form-item label="类型">
@@ -85,7 +87,7 @@
                         :on-remove="handleRemove">
                         <i class="el-icon-plus"></i>
                     </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
+                    <el-dialog :visible.sync="dialogVisibleImg">
                         <img width="100%" :src="dialogImageUrl" alt="">
                     </el-dialog>
                 </el-form-item>
@@ -95,6 +97,15 @@
             </el-form>
             <el-button class='btn' type="primary" plain　@click='submitData()'>确认</el-button>
         </div>
+        <el-dialog
+            title="提交成功"
+            :visible.sync="dialogVisibleItem"
+            width="30%">
+            <span>系统正在给你匹配最优秀的承运商</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="submitOrder()">确 定</el-button>
+            </span>
+        </el-dialog>
     </el-card>
 </template>
 
@@ -119,7 +130,8 @@ export default {
             currentPage: 1,
             pageSize: 0,
             dialogImageUrl: '',
-            dialogVisible: false,
+            // 图片上传
+            dialogVisibleImg: false,
             // 获取类型
             GoodsType: [],
             // 当前选中的货物的值
@@ -129,7 +141,9 @@ export default {
             PackingTypeValue: '',
             // 车辆类型查询
             CarType: [],
-            CarTypeValue: ''
+            CarTypeValue: '',
+            // 点击确认对话框
+            dialogVisibleItem: false
         }
     },
     created(){
@@ -143,11 +157,17 @@ export default {
         this.getSysCarType();
     },
     methods: {
+        // 点击对话框的成功提示，跳转到支付详情页
+        submitOrder(){
+            this.dialogVisibleItem = false;
+            this.$router.push({
+                name: 'lingdanOrder'
+            });
+        },
         // 点击提交弹出对话框
         submitData(){
-            this.$alert('提交成功，系统正在为你匹配最优秀的承运商', {
-                confirmButtonText: '确定'
-            });
+            // 提交数据成功之后打开对话框提示
+            this.dialogVisibleItem = true;
         },
         // 图片移除时触发
         handleRemove(){
