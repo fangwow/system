@@ -182,6 +182,9 @@ export default {
         this.getSysCarType();
     },
     methods: {
+        getAddress(){
+            
+        },
         // 点击对话框的成功提示，跳转到支付详情页
         submitOrder(){
             this.dialogVisibleItem = false;
