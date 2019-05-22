@@ -180,10 +180,13 @@ export default {
         this.getSysPackingType();
         // 车辆类型查询
         this.getSysCarType();
+        // 获取当前地理位置
+        this.getAddress();
     },
     methods: {
-        getAddress(){
-            
+        async getAddress(){
+            const res = await this.$http.get(`http://api.map.baidu.com/location/ip?ak=qeaWNDHywm4w1XqSRSpTaaDWhqC31V7B`);
+            console.log(res);
         },
         // 点击对话框的成功提示，跳转到支付详情页
         submitOrder(){
@@ -208,8 +211,9 @@ export default {
         },
         // 级联选择器动态加载次级数据
         async handleItemChange(e,val) {
+            console.log(e,val);
             // 获取二级数据
-            if(this.selectedOptions.length === 1){
+            if(e.length === 1){
                 const newArr1 = [];
                 val.forEach((item) => {
                     if(item.areaId == e[0]) {
@@ -224,6 +228,9 @@ export default {
                 if(this.selectedOptions.length === 2){
                     console.log(e[1],val);
                 }
+            }
+            if(e.length === 2){
+
             }
         },
         // 地域三级联动查询
